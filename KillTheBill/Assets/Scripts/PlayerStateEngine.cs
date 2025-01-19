@@ -15,10 +15,21 @@ public class PlayerStateEngine : MonoBehaviour
     private int _numObjOnScreen;
     private List<Vector3> _weaponPos = new List<Vector3>();
     private List<GameObject> _weaponTracker = new List<GameObject>();
+    public Action OnWeaponFired;
+    public static PlayerStateEngine Instance;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     void Start() {
+        if (Instance != null && Instance != this)
+        {
+            Debug.LogWarning("Found another instance of PlayerStateEngine. There should only be one per level");
+            Destroy(Instance);
+            return;
+        }
+
+        Instance = this;
+
         determineSpaces();
         createWeaponObj();
         //what needs to be sent from the Player Controls script to tell state manager to pop first element
@@ -47,13 +58,13 @@ public class PlayerStateEngine : MonoBehaviour
             length += Time.fixedDeltaTime;
         }
         weapon.transform.position = targetPos;
-        PlayerControls playerControl = weapon.GetComponent<PlayerControls>();
-        playerControl.enabled = enableControl;
+        EnableScripts(weapon, enableControl);
         yield return null;
     }
 
     public void afterWeaponFired() {
         _weaponTracker[0].GetComponent<PlayerControls>().enabled = false;
+        OnWeaponFired?.Invoke();
         _weaponTracker.RemoveAt(0);
         _weaponQueue.RemoveAt(0);
         updateQueue();
@@ -97,13 +108,29 @@ public class PlayerStateEngine : MonoBehaviour
         //spawn obj's based on values in _weaponPos
         for(int i = 0; i < _weaponPos.Count; i++) {
             GameObject weaponClone = Instantiate(_weaponQueue[i], _weaponPos[i], Quaternion.identity);
-            PlayerControls weaponPlayerControls = weaponClone.GetComponent<PlayerControls>();
-            weaponPlayerControls.playerStateEngine = this;
             if(i == 0) {
-                weaponPlayerControls.enabled = true;
+                EnableScripts(weaponClone, true);
             }
             _weaponTracker.Add(weaponClone);
         }
+    }
+
+    private void EnableScripts(GameObject obj, bool isEnabled)
+    {
+        PlayerControls weaponPlayerControls = obj.GetComponent<PlayerControls>();
+
+        weaponPlayerControls.enabled = isEnabled;
+        var baseAmmo = obj.GetComponent<BaseAmmo>();
+        var reactivateAmmo = obj.GetComponent<ReactivateAmmo>();
+
+        if (baseAmmo != null)
+        {
+            baseAmmo.enabled = isEnabled;
+        }
+        else if (reactivateAmmo != null)
+        {
+            reactivateAmmo.enabled = isEnabled;
+        }    
     }
 }
 

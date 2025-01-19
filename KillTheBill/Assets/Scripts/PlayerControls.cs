@@ -16,7 +16,7 @@ public class PlayerControls : MonoBehaviour
     private bool _isReadyToLaunch = false;
     [SerializeField] private LineRenderer _lineRenderer;
 
-    public PlayerStateEngine playerStateEngine;
+    private PlayerStateEngine _playerStateEngine;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
@@ -24,6 +24,7 @@ public class PlayerControls : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         _lineRenderer = GetComponent<LineRenderer>();
         _rigidbody.freezeRotation = false;
+        _playerStateEngine = PlayerStateEngine.Instance;
     }
 
     private void _OnFirstMouseDown() {
@@ -52,7 +53,7 @@ public class PlayerControls : MonoBehaviour
         this._rigidbody.AddForce(_direction * _velocityMultiplier);
         _lineRenderer.SetPosition(0, this.transform.position);
         _lineRenderer.SetPosition(1, this.transform.position);
-        playerStateEngine.afterWeaponFired();
+        _playerStateEngine.afterWeaponFired();
     }
 
 
@@ -73,7 +74,7 @@ public class PlayerControls : MonoBehaviour
         if (_isReadyToLaunch)
         {
             if (Input.GetMouseButton(0)) {
-            _OnMouseHeld();
+                _OnMouseHeld();
             }
             else if (Input.GetMouseButtonUp(0)) {
                 _OnMouseUp();
