@@ -13,7 +13,7 @@ public class PlayerStateEngine : MonoBehaviour
     [SerializeField] private float _firstPosOffset;
 
     private int _numObjOnScreen;
-   private List<Vector3> _weaponPos = new List<Vector3>();
+    private List<Vector3> _weaponPos = new List<Vector3>();
     private List<GameObject> _weaponTracker = new List<GameObject>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
