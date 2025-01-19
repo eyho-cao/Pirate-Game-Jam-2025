@@ -15,11 +15,14 @@ public class PlayerControls : MonoBehaviour
     private Vector3 _direction;
     [SerializeField] private LineRenderer _lineRenderer;
 
+    public PlayerStateEngine playerStateEngine;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
         _mainCamera = Camera.main;
         _rigidbody = GetComponent<Rigidbody>();
         _lineRenderer = GetComponent<LineRenderer>();
+        _rigidbody.freezeRotation = false;
     }
 
     private void _OnFirstMouseDown() {
@@ -34,6 +37,7 @@ public class PlayerControls : MonoBehaviour
         _clone = null;
         _lineRenderer.SetPosition(0, this.transform.position);
         _lineRenderer.SetPosition(1, this.transform.position);
+        playerStateEngine.afterWeaponFired();
     }
 
 
