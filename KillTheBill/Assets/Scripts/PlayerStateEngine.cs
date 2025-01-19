@@ -40,14 +40,15 @@ public class PlayerStateEngine : MonoBehaviour
     IEnumerator moveObject(GameObject weapon, Vector3 targetPos, bool enableControl) {
         Vector3 weaponPos = weapon.transform.position;
         float length = 0;
-        Debug.Log(weapon.transform.position);
+        // Debug.Log(weapon.transform.position);
         while(weapon.transform.position.x != targetPos.x) {
             weapon.transform.position = Vector3.Lerp(weaponPos, targetPos, length);
             yield return new WaitForFixedUpdate();
             length += Time.fixedDeltaTime;
         }
         weapon.transform.position = targetPos;
-        weapon.GetComponent<PlayerControls>().enabled = enableControl;
+        PlayerControls playerControl = weapon.GetComponent<PlayerControls>();
+        playerControl.enabled = enableControl;
         yield return null;
     }
 
@@ -63,11 +64,11 @@ public class PlayerStateEngine : MonoBehaviour
             StartCoroutine(moveObject(_weaponTracker[i], _weaponPos[i], i==0));
         }
 
-        if(_weaponQueue.Count > _numObjOnScreen) {
-            GameObject weaponClone = Instantiate(_weaponQueue[_numObjOnScreen], _weaponPos[_numObjOnScreen], Quaternion.identity);
-            weaponClone.GetComponent<PlayerControls>().playerStateEngine = this;
-            _weaponTracker.Add(weaponClone);
-        }
+        // if(_weaponQueue.Count > _numObjOnScreen) {
+        //     GameObject weaponClone = Instantiate(_weaponQueue[_numObjOnScreen], _weaponPos[_numObjOnScreen], Quaternion.identity);
+        //     weaponClone.GetComponent<PlayerControls>().playerStateEngine = this;
+        //     _weaponTracker.Add(weaponClone);
+        // }
 
     }
 

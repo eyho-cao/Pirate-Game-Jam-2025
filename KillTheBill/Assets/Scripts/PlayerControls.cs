@@ -11,8 +11,9 @@ public class PlayerControls : MonoBehaviour
 
     private Camera _mainCamera;
     private Rigidbody _rigidbody;
-    private GameObject _clone = null;
+    private GameObject _clickPointObjClone = null;
     private Vector3 _direction;
+    private bool _isReadyToLaunch = false;
     [SerializeField] private LineRenderer _lineRenderer;
 
     public PlayerStateEngine playerStateEngine;
@@ -27,29 +28,36 @@ public class PlayerControls : MonoBehaviour
 
     private void _OnFirstMouseDown() {
         Vector3 clickPos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
-        _clone = (GameObject) Instantiate(_clickPointObject);
-        _clone.transform.position = new Vector3(clickPos.x, clickPos.y, 0);
+        _clickPointObjClone = (GameObject) Instantiate(_clickPointObject);
+        _clickPointObjClone.transform.position = new Vector3(clickPos.x, clickPos.y, 0);
+        _isReadyToLaunch = true;
+    }
+
+    private void _OnMouseHeld() {
+        Vector3 clickPos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        _direction = _clickPointObjClone.transform.position - new Vector3(clickPos.x, clickPos.y, 0);
+        _direction = new Vector3(Mathf.Clamp(_direction.x, -_maxVelocity.x, _maxVelocity.x), Mathf.Clamp(_direction.y, -_maxVelocity.y, _maxVelocity.y), 0);
+        DrawLine();
     }
 
     private void _OnMouseUp() {
+        _isReadyToLaunch = false;
+        Destroy(_clickPointObjClone);
+        _clickPointObjClone = null;
+
+        if (_direction == Vector3.zero)
+        {
+            return;
+        }
         this._rigidbody.AddForce(_direction * _velocityMultiplier);
-        Destroy(_clone);
-        _clone = null;
         _lineRenderer.SetPosition(0, this.transform.position);
         _lineRenderer.SetPosition(1, this.transform.position);
         playerStateEngine.afterWeaponFired();
     }
 
 
-    private void _OnMouseDown() {
-        Vector3 clickPos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
-        _direction = _clone.transform.position - new Vector3(clickPos.x, clickPos.y, 0);
-        _direction = new Vector3(Mathf.Clamp(_direction.x, -_maxVelocity.x, _maxVelocity.x), Mathf.Clamp(_direction.y, -_maxVelocity.y, _maxVelocity.y), 0);
-        DrawLine();
-    }
-
     void DrawLine() {
-        if(_clone == null) {
+        if(_clickPointObjClone == null) {
             return;
         }
         _lineRenderer.SetPosition(0, this.transform.position);
@@ -61,16 +69,15 @@ public class PlayerControls : MonoBehaviour
         if (Input.GetMouseButtonDown(0)) {
             _OnFirstMouseDown();
         }
-        else if (Input.GetMouseButton(0)) {
-            _OnMouseDown();
-        }
-        else if (Input.GetMouseButtonUp(0)) {
-            _OnMouseUp();
+
+        if (_isReadyToLaunch)
+        {
+            if (Input.GetMouseButton(0)) {
+            _OnMouseHeld();
+            }
+            else if (Input.GetMouseButtonUp(0)) {
+                _OnMouseUp();
+            }
         }
     }
-
-   
-
-
-
 }
