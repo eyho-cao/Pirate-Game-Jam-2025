@@ -58,7 +58,7 @@ public class GameStateManager : MonoBehaviour
 
         int stars = getNumStarsEarned();
 
-        if(stars < 3){
+        if(stars < _starShotRequirements.Length){
             GameObject star = _starContainer.transform.GetChild(stars).gameObject;
             star.SetActive(false);
         }
