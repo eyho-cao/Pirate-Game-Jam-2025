@@ -10,8 +10,10 @@ public class PlayerStateEngine : MonoBehaviour
     [SerializeField] private List<GameObject> _weaponQueue = new List<GameObject>();
     [SerializeField] private float _spacing;
 
+    [SerializeField] private float _firstPosOffset;
+
     private int _numObjOnScreen;
-    [SerializeField] private List<Vector3> _weaponPos = new List<Vector3>();
+   private List<Vector3> _weaponPos = new List<Vector3>();
     private List<GameObject> _weaponTracker = new List<GameObject>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -75,10 +77,10 @@ public class PlayerStateEngine : MonoBehaviour
         for(int i = 0; i < _weaponQueue.Count; i++) {
             Vector3 weaponPos;
             if(i == 0) {
-                weaponPos = new Vector3(_startPos.x-(_spacing*i), _startPos.y, _startPos.z);
+                weaponPos = new Vector3(_startPos.x-(_spacing*i), _startPos.y + _firstPosOffset, _startPos.z);
             }
             else {
-                weaponPos = new Vector3(_startPos.x-(_spacing*i), _startPos.y-0.5f, _startPos.z);
+                weaponPos = new Vector3(_startPos.x-(_spacing*i), _startPos.y, _startPos.z);
             }
             Vector3 nextPos = Camera.main.WorldToViewportPoint(weaponPos);
             _weaponPos.Add(weaponPos);
