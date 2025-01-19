@@ -90,6 +90,11 @@ public class PlayerStateEngine : MonoBehaviour
                 break;
             }
         }
+
+        // Edge case where all objects fit on screen
+        if(_numObjOnScreen == 0){
+            _numObjOnScreen = _weaponQueue.Count;
+        }
     }
 
     private void createWeaponObj() {
