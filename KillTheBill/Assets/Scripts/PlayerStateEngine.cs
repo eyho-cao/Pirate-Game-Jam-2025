@@ -9,7 +9,6 @@ public class PlayerStateEngine : MonoBehaviour
     [SerializeField] private Vector3 _startPos;
     [SerializeField] private List<GameObject> _weaponQueue = new List<GameObject>();
     [SerializeField] private float _spacing;
-
     [SerializeField] private float _firstPosOffset;
 
     private int _numObjOnScreen;
@@ -30,17 +29,9 @@ public class PlayerStateEngine : MonoBehaviour
         */
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-        
-    }
-
     IEnumerator moveObject(GameObject weapon, Vector3 targetPos, bool enableControl) {
         Vector3 weaponPos = weapon.transform.position;
         float length = 0;
-        Debug.Log(weapon.transform.position);
         while(weapon.transform.position.x != targetPos.x) {
             weapon.transform.position = Vector3.Lerp(weaponPos, targetPos, length);
             yield return new WaitForFixedUpdate();
@@ -105,6 +96,10 @@ public class PlayerStateEngine : MonoBehaviour
             }
             _weaponTracker.Add(weaponClone);
         }
+    }
+
+    public int GetNumWeaponsInQueue(){
+        return _weaponQueue.Count;
     }
 }
 
