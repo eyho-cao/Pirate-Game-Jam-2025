@@ -9,7 +9,6 @@ public class PlayerStateEngine : MonoBehaviour
     [SerializeField] private Vector3 _startPos;
     [SerializeField] private List<GameObject> _weaponQueue = new List<GameObject>();
     [SerializeField] private float _spacing;
-
     [SerializeField] private float _firstPosOffset;
 
     private int _numObjOnScreen;
@@ -41,13 +40,6 @@ public class PlayerStateEngine : MonoBehaviour
         */
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-        
-    }
-
     IEnumerator moveObject(GameObject weapon, Vector3 targetPos, bool enableControl) {
         Vector3 weaponPos = weapon.transform.position;
         float length = 0;
@@ -74,18 +66,19 @@ public class PlayerStateEngine : MonoBehaviour
             StartCoroutine(moveObject(_weaponTracker[i], _weaponPos[i], i==0));
         }
 
-        // if(_weaponQueue.Count > _numObjOnScreen) {
-        //     GameObject weaponClone = Instantiate(_weaponQueue[_numObjOnScreen], _weaponPos[_numObjOnScreen], Quaternion.identity);
-        //     weaponClone.GetComponent<PlayerControls>().playerStateEngine = this;
-        //     _weaponTracker.Add(weaponClone);
-        // }
+        if(_weaponQueue.Count > _numObjOnScreen) {
+            GameObject weaponClone = Instantiate(_weaponQueue[_numObjOnScreen], _weaponPos[_numObjOnScreen], Quaternion.identity);
+            weaponClone.GetComponent<PlayerControls>().playerStateEngine = this;
+            _weaponTracker.Add(weaponClone);
+        }
 
     }
 
     private void determineSpaces() {
         //determine the position of all objs from front to back, stop after first element that would be off the screen
         //start pos, start subtracting the x value and check if that world pos value is on screen
-        for(int i = 0; i < _weaponQueue.Count; i++) {
+        int i = 0;
+        while(true) {
             Vector3 weaponPos;
             if(i == 0) {
                 weaponPos = new Vector3(_startPos.x-(_spacing*i), _startPos.y + _firstPosOffset, _startPos.z);
@@ -100,6 +93,7 @@ public class PlayerStateEngine : MonoBehaviour
                 _numObjOnScreen = i;
                 break;
             }
+            i++;
         }
     }
 
@@ -130,6 +124,9 @@ public class PlayerStateEngine : MonoBehaviour
         {
             reactivateAmmo.enabled = isEnabled;
         }    
+
+    public int GetNumWeaponsInQueue(){
+        return _weaponQueue.Count;
     }
 }
 
