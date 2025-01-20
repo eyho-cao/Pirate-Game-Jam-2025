@@ -15,7 +15,7 @@ public class PlayerStateEngine : MonoBehaviour
     private int _numObjOnScreen;
     private List<Vector3> _weaponPos = new List<Vector3>();
     private List<GameObject> _weaponTracker = new List<GameObject>();
-    public Action OnWeaponFired;
+    public Action<GameObject> OnWeaponFired;
     public static PlayerStateEngine Instance;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -64,7 +64,7 @@ public class PlayerStateEngine : MonoBehaviour
 
     public void afterWeaponFired() {
         _weaponTracker[0].GetComponent<PlayerControls>().enabled = false;
-        OnWeaponFired?.Invoke();
+        OnWeaponFired?.Invoke(_weaponTracker[0]);
         _weaponTracker.RemoveAt(0);
         _weaponQueue.RemoveAt(0);
         updateQueue();
