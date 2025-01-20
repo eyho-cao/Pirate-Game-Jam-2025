@@ -18,15 +18,7 @@ public class BaseAmmo : MonoBehaviour
     }
 
     // Try not to use Start because the script is deactivated by default when starting
-    void Start ()
-    {
-    }
-
-    void Update()
-    {
-
-    }
-
+    
     public virtual void FreezeObject()
     {
         _rigidBody.constraints = RigidbodyConstraints.FreezePosition;

@@ -24,7 +24,7 @@ public class PlayerStateEngine : MonoBehaviour
         if (Instance != null && Instance != this)
         {
             Debug.LogWarning("Found another instance of PlayerStateEngine. There should only be one per level");
-            Destroy(Instance);
+            Destroy(this.gameObject);
             return;
         }
 
@@ -51,7 +51,6 @@ public class PlayerStateEngine : MonoBehaviour
     IEnumerator moveObject(GameObject weapon, Vector3 targetPos, bool enableControl) {
         Vector3 weaponPos = weapon.transform.position;
         float length = 0;
-        // Debug.Log(weapon.transform.position);
         while(weapon.transform.position.x != targetPos.x) {
             weapon.transform.position = Vector3.Lerp(weaponPos, targetPos, length);
             yield return new WaitForFixedUpdate();
