@@ -74,7 +74,8 @@ public class PlayerStateEngine : MonoBehaviour
     private void determineSpaces() {
         //determine the position of all objs from front to back, stop after first element that would be off the screen
         //start pos, start subtracting the x value and check if that world pos value is on screen
-        for(int i = 0; i < _weaponQueue.Count; i++) {
+        int i = 0;
+        while(true) {
             Vector3 weaponPos;
             if(i == 0) {
                 weaponPos = new Vector3(_startPos.x-(_spacing*i), _startPos.y + _firstPosOffset, _startPos.z);
@@ -89,12 +90,13 @@ public class PlayerStateEngine : MonoBehaviour
                 _numObjOnScreen = i;
                 break;
             }
+            i++;
         }
     }
 
     private void createWeaponObj() {
         //spawn obj's based on values in _weaponPos
-        for(int i = 0; i < _weaponPos.Count; i++) {
+        for(int i = 0; i < _weaponPos.Count && i < _weaponQueue.Count; i++) {
             GameObject weaponClone = Instantiate(_weaponQueue[i], _weaponPos[i], Quaternion.identity);
             PlayerControls weaponPlayerControls = weaponClone.GetComponent<PlayerControls>();
             weaponPlayerControls.playerStateEngine = this;
