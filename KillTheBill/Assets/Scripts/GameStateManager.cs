@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
 
 enum GameState {
     GS_RUNNING,
@@ -15,16 +16,32 @@ public class GameStateManager : MonoBehaviour
     [SerializeField] private TMP_Text _countText;
     [SerializeField] private int[] _starShotRequirements = new int[3];
     [SerializeField] private GameObject _starContainer;
+    [SerializeField] private GameObject pauseSystem;
+    
 
     private PlayerStateEngine _playerState;
     private GameState _currentGameState = GameState.GS_RUNNING;
-
 
 
     void Start()
     {
         _playerState = (PlayerStateEngine)GameObject.FindFirstObjectByType(typeof(PlayerStateEngine));
         // Get all enemy object sin scene
+    }
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.P)){
+            if(_currentGameState != GameState.GS_PAUSED) {
+                _currentGameState = GameState.GS_PAUSED;
+                Debug.Log("game paused");
+                pauseSystem.GetComponent<PauseSystem>().pauseGame();
+            } else {
+                _currentGameState = GameState.GS_RUNNING;
+                pauseSystem.GetComponent<PauseSystem>().unpauseGame();
+            }
+        }
+        
     }
 
     void FixedUpdate()
