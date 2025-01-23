@@ -68,7 +68,7 @@ public class PlayerStateEngine : MonoBehaviour
 
         if(_weaponQueue.Count > _numObjOnScreen) {
             GameObject weaponClone = Instantiate(_weaponQueue[_numObjOnScreen], _weaponPos[_numObjOnScreen], Quaternion.identity);
-            weaponClone.GetComponent<PlayerControls>().playerStateEngine = this;
+            weaponClone.GetComponent<PlayerControls>()._playerStateEngine = this;
             _weaponTracker.Add(weaponClone);
         }
 
@@ -124,6 +124,7 @@ public class PlayerStateEngine : MonoBehaviour
         {
             reactivateAmmo.enabled = isEnabled;
         }    
+    }
 
     public int GetNumWeaponsInQueue(){
         return _weaponQueue.Count;
