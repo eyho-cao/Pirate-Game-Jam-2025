@@ -16,7 +16,7 @@ public class GameStateManager : MonoBehaviour
     [SerializeField] private TMP_Text _countText;
     [SerializeField] private int[] _starShotRequirements = new int[3];
     [SerializeField] private GameObject _starContainer;
-    [SerializeField] private GameObject pauseSystem;
+    [SerializeField] private PauseSystem _pauseSystem;
     
 
     private PlayerStateEngine _playerState;
@@ -35,10 +35,10 @@ public class GameStateManager : MonoBehaviour
             if(_currentGameState != GameState.GS_PAUSED) {
                 _currentGameState = GameState.GS_PAUSED;
                 Debug.Log("game paused");
-                pauseSystem.GetComponent<PauseSystem>().pauseGame();
+                _pauseSystem.pauseGame();
             } else {
                 _currentGameState = GameState.GS_RUNNING;
-                pauseSystem.GetComponent<PauseSystem>().unpauseGame();
+                _pauseSystem.unpauseGame();
             }
         }
         
