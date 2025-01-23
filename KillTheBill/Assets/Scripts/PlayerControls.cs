@@ -16,7 +16,7 @@ public class PlayerControls : MonoBehaviour
     private bool _isReadyToLaunch = false;
     [SerializeField] private LineRenderer _lineRenderer;
 
-    private PlayerStateEngine _playerStateEngine;
+    public PlayerStateEngine _playerStateEngine;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
