@@ -98,7 +98,7 @@ public class PlayerStateEngine : MonoBehaviour
 
     private void createWeaponObj() {
         //spawn obj's based on values in _weaponPos
-        for(int i = 0; i < _weaponQueue.Count; i++) {
+        for(int i = 0; i < _weaponPos.Count && i < _weaponQueue.Count; i++) {
             GameObject weaponClone = Instantiate(_weaponQueue[i], _weaponPos[i], Quaternion.identity);
             if(i == 0) {
                 EnableScripts(weaponClone, true);
