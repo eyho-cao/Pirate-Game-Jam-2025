@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using TMPro;
 
 public class SceneSelect : MonoBehaviour
 {
@@ -17,6 +17,8 @@ public class SceneSelect : MonoBehaviour
             clone.transform.SetParent(_levelSelectMenu.transform);
             int rowNum =  (i - (i % _numPerRow)) / _numPerRow;
             clone.transform.position = new Vector3(_startPos.x + (i % _numPerRow *_horizontalGap), _startPos.y - (rowNum * _verticalGap), 0);
+            clone.GetComponentInChildren<SceneLoader>().sceneName = "" + (i+1);
+            clone.GetComponentInChildren<TMP_Text>().text = "Level - " + (i+1);
         }
     }
 }
