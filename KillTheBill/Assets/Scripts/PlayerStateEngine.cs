@@ -14,7 +14,6 @@ public class PlayerStateEngine : MonoBehaviour
     private int _numObjOnScreen;
     private List<Vector3> _weaponPos = new List<Vector3>();
     private List<GameObject> _weaponTracker = new List<GameObject>();
-    [SerializeField] private SceneSelect selector;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
