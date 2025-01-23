@@ -33,7 +33,6 @@ public class GameStateManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.P)){
             if(_currentGameState != GameState.GS_PAUSED) {
                 _currentGameState = GameState.GS_PAUSED;
-                Debug.Log("game paused");
                 _pauseSystem.pauseGame();
             } else {
                 _currentGameState = GameState.GS_RUNNING;
