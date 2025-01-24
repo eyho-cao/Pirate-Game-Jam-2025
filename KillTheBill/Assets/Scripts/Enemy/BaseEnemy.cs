@@ -1,10 +1,14 @@
+using System;
 using UnityEngine;
 
 public class BaseEnemy : MonoBehaviour
 {
-    [SerializeField] public float _health = 1.0f;
-    [SerializeField] public float _weight = 0.5f;
+    [SerializeField] private float _health = 1.0f;
+    [SerializeField] private float _weight = 0.5f;
+    [SerializeField] private int _score = 100;
     private Rigidbody _rigidBody;
+    private bool _isDying = false;
+    public Action<int> OnEnemyDied;
 
     public void Start()
     {
@@ -17,9 +21,9 @@ public class BaseEnemy : MonoBehaviour
 
     public void Update()
     {
-        if (_health <= 0)
+        if (_health <= 0 && !_isDying)
         {
-            Destroy(this.gameObject);
+            HandleEnemyDead();
         }
     }
 
@@ -36,5 +40,12 @@ public class BaseEnemy : MonoBehaviour
                 _health -= objectWeight;
             }
         }
+    }
+
+    private void HandleEnemyDead()
+    {
+        _isDying = true;
+        OnEnemyDied?.Invoke(_score);
+        Destroy(this.gameObject);
     }
 }
