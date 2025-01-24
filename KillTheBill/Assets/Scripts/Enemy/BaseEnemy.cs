@@ -30,10 +30,23 @@ public class BaseEnemy : MonoBehaviour
     private void OnCollisionEnter(Collision other) 
     {
         // Only collide with "Player" (6), "Bullet" (7), "Wall" (9)
-        int layerMask = (1 << 6) | (1 << 7) | (1 << 9);
+        int wallLayerMask = (1 << 9);
+        int collidableLayerMask = (1 << 6) | (1 << 7) | wallLayerMask;
+        
+        GameObject otherGameObject = other.gameObject;
 
-        if ((layerMask & (1 << other.gameObject.layer)) != 0)
+        if ((collidableLayerMask & (1 << other.gameObject.layer)) != 0)
         {
+            // If the enemy is placed on a "Wall" object, it shouldn't deal damage to itself
+            // Only when fallen on top of it, would it die!
+            if ((wallLayerMask & (1 << other.gameObject.layer)) != 0)
+            {
+                if (otherGameObject.transform.position.y <= this.transform.position.y)
+                {
+                    return;
+                }
+            }
+
             float objectWeight = other.gameObject.GetComponent<Rigidbody>().mass;
             if (objectWeight > _weight)
             {
