@@ -16,6 +16,7 @@ public class GameStateManager : MonoBehaviour
     [SerializeField] private int[] _starShotRequirements = new int[3];
     [SerializeField] private GameObject _starContainer;
     [SerializeField] private PauseSystem _pauseSystem;
+    [SerializeField] private LevelLostSystem levelLostSystem;
     
 
     private PlayerStateEngine _playerState;
@@ -33,10 +34,10 @@ public class GameStateManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.P)){
             if(_currentGameState != GameState.GS_PAUSED) {
                 _currentGameState = GameState.GS_PAUSED;
-                _pauseSystem.pauseGame();
+                _pauseSystem.GetComponent<PauseSystem>().pauseGame();
             } else {
                 _currentGameState = GameState.GS_RUNNING;
-                _pauseSystem.unpauseGame();
+                _pauseSystem.GetComponent<PauseSystem>().unpauseGame();
             }
         }
         
@@ -48,6 +49,7 @@ public class GameStateManager : MonoBehaviour
         //maybe we save the attempt in a win?
         if(_currentGameState == GameState.GS_LOSE){
             Debug.Log("LOSER");
+            levelLostSystem.levelLost();
         }
         if(_currentGameState == GameState.GS_WIN){
             int stars = getNumStarsEarned();
@@ -60,6 +62,9 @@ public class GameStateManager : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.F)){
             _currentGameState = GameState.GS_WIN;
+        }
+        if(Input.GetKeyDown(KeyCode.L)){
+            _currentGameState = GameState.GS_LOSE;
         }
 
         checkPlayerWeaponCount();
