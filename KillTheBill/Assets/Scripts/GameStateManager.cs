@@ -24,7 +24,7 @@ public class GameStateManager : MonoBehaviour
 
     void Start()
     {
-        _playerState = (PlayerStateEngine)GameObject.FindFirstObjectByType(typeof(PlayerStateEngine));
+        _playerState = PlayerStateEngine.Instance;
         // Get all enemy object sin scene
     }
 
