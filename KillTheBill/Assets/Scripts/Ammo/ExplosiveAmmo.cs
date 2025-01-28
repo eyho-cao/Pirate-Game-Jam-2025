@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,14 +12,17 @@ public class ExplosiveAmmo : BaseAmmo
     private float _explosionRadius = 50.0f;
     [SerializeField]
     private float _explosionForce = 500.0f;
+    [SerializeField]
+    private GameObject _countdownTextObject;
     private bool _isReadyToExplode = false;
     private bool _isWeaponOnFlight = false;
     private float _currentTime = 0.0f;
     private PlayerStateEngine _playerStateEngine;
+    private TMP_Text _countdownText;
 
-    protected override void Awake ()
+    protected override void Start ()
     {
-        base.Awake();
+        base.Start();
         
         _playerStateEngine = PlayerStateEngine.Instance;
         if (_playerStateEngine != null)
@@ -29,18 +33,24 @@ public class ExplosiveAmmo : BaseAmmo
         {
             Debug.LogWarning("No PlayerStateEngine is available");
         }
+        Debug.Log("Starting");
+        _currentTime = _timeUntilExplosion;
+        _countdownTextObject.SetActive(true);
+        _countdownText = _countdownTextObject.GetComponent<TMP_Text>();
+        UpdateText(((int)_currentTime).ToString());
     }
 
     void Update()
     {
-        if (_currentTime >= _timeUntilExplosion && !_isReadyToExplode)
+        if (_currentTime <= 0 && !_isReadyToExplode)
         {
             _isReadyToExplode = true;
             Explode();
             return;
         }
 
-        _currentTime += Time.deltaTime;
+        _currentTime -= Time.deltaTime;
+        UpdateText(((int)_currentTime).ToString());
     }
 
     private void Explode()
@@ -59,15 +69,21 @@ public class ExplosiveAmmo : BaseAmmo
                 }
             }
         }
+
+        _countdownTextObject.SetActive(false);
         
         // Do this in the case of the ammo is not fired and it explodes to move on to next ammo
         if (!_isWeaponOnFlight)
         {
-            Debug.LogWarning("Does this get called");
             _playerStateEngine.OnFinishedFiring();
         }
 
         Destroy(this.gameObject);
+    }
+
+    private void UpdateText(string text)
+    {
+        _countdownText.text = text;
     }
     
     private void OnDrawGizmos() 
@@ -84,7 +100,9 @@ public class ExplosiveAmmo : BaseAmmo
     private void HandleWeaponFired(GameObject currentAmmo)
     {
         if (gameObject == currentAmmo.gameObject)
+        {
             _isWeaponOnFlight = true;
+        }
     }
 
 }
