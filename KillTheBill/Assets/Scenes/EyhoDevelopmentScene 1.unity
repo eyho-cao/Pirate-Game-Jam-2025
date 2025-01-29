@@ -564,17 +564,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1629399637 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6273465872955515798, guid: 12d1166169a140b4c80608b0910d9607, type: 3}
-  m_PrefabInstance: {fileID: 4352427397141770361}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3196bdf29aa48049b71aeb475e3eb6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &4352427397141770361
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -591,42 +580,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 612048918}
-    - target: {fileID: 2431858341680789721, guid: 12d1166169a140b4c80608b0910d9607, type: 3}
-      propertyPath: m_Name
-      value: Restart Button
-      objectReference: {fileID: 0}
-    - target: {fileID: 2954642118773076459, guid: 12d1166169a140b4c80608b0910d9607, type: 3}
-      propertyPath: m_text
-      value: RESTART
-      objectReference: {fileID: 0}
-    - target: {fileID: 3929541460692362688, guid: 12d1166169a140b4c80608b0910d9607, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3929541460692362688, guid: 12d1166169a140b4c80608b0910d9607, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3929541460692362688, guid: 12d1166169a140b4c80608b0910d9607, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1629399637}
-    - target: {fileID: 3929541460692362688, guid: 12d1166169a140b4c80608b0910d9607, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3929541460692362688, guid: 12d1166169a140b4c80608b0910d9607, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: resetLevel
-      objectReference: {fileID: 0}
-    - target: {fileID: 3929541460692362688, guid: 12d1166169a140b4c80608b0910d9607, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: LevelLostSystem, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3929541460692362688, guid: 12d1166169a140b4c80608b0910d9607, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 4601358438513795940, guid: 12d1166169a140b4c80608b0910d9607, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -671,13 +624,13 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 612048918}
-    - target: {fileID: 8237713443775700840, guid: 12d1166169a140b4c80608b0910d9607, type: 3}
-      propertyPath: m_text
-      value: RESTART
+    - target: {fileID: 7212640052795956363, guid: 12d1166169a140b4c80608b0910d9607, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1925
       objectReference: {fileID: 0}
-    - target: {fileID: 8996302824108832459, guid: 12d1166169a140b4c80608b0910d9607, type: 3}
-      propertyPath: m_text
-      value: RETURN TO MAIN MENU
+    - target: {fileID: 7212640052795956363, guid: 12d1166169a140b4c80608b0910d9607, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1085
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
