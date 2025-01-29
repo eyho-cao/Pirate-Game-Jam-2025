@@ -17,8 +17,9 @@ public class GameStateManager : MonoBehaviour
     [SerializeField] private TMP_Text _countText;
     [SerializeField] private int[] _starShotRequirements = new int[3];
     [SerializeField] private GameObject _starContainer;
+    [SerializeField] private PauseSystem _pauseSystem;
+    
 
-    private PlayerStateEngine _playerState;
     private GameState _currentGameState = GameState.GS_RUNNING;
 
     private List<GameObject> _enemies;
@@ -34,6 +35,21 @@ public class GameStateManager : MonoBehaviour
             BaseEnemy baseEnemyComponent = e.GetComponent<BaseEnemy>();
             baseEnemyComponent.OnEnemyDied += UpdateScore;
         }
+
+    }
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.P)){
+            if(_currentGameState != GameState.GS_PAUSED) {
+                _currentGameState = GameState.GS_PAUSED;
+                _pauseSystem.pauseGame();
+            } else {
+                _currentGameState = GameState.GS_RUNNING;
+                _pauseSystem.unpauseGame();
+            }
+        }
+        
     }
 
     void FixedUpdate()
@@ -62,7 +78,7 @@ public class GameStateManager : MonoBehaviour
     }
 
     private void updateUI() {
-        int numWeaponsLeft = _playerState.GetNumWeaponsInQueue();
+        int numWeaponsLeft = PlayerStateEngine.Instance.GetNumWeaponsInQueue();
         _countText.text = "Weapons: " + numWeaponsLeft;
 
         int stars = getNumStarsEarned();
@@ -87,8 +103,8 @@ public class GameStateManager : MonoBehaviour
   
     private void checkPlayerWeaponCount() {
         
-        if(_playerState){
-            int numWeaponsLeft = _playerState.GetNumWeaponsInQueue();
+        if(PlayerStateEngine.Instance){
+            int numWeaponsLeft = PlayerStateEngine.Instance.GetNumWeaponsInQueue();
             _countText.text = "Weapons: " + numWeaponsLeft;
             if(numWeaponsLeft <= 0) {
                 StartCoroutine(WaitForGameCompleteState());
@@ -97,7 +113,7 @@ public class GameStateManager : MonoBehaviour
     }
 
     private int getNumStarsEarned() {
-        int numWeaponsLeft = _playerState.GetNumWeaponsInQueue();
+        int numWeaponsLeft = PlayerStateEngine.Instance.GetNumWeaponsInQueue();
         int i = 0;
         for (i = 0; i < _starShotRequirements.Length; i++) {
             if(numWeaponsLeft < _starShotRequirements[i]){
