@@ -33,7 +33,6 @@ public class ExplosiveAmmo : BaseAmmo
         {
             Debug.LogWarning("No PlayerStateEngine is available");
         }
-        Debug.Log("Starting");
         _currentTime = _timeUntilExplosion;
         _countdownTextObject.SetActive(true);
         _countdownText = _countdownTextObject.GetComponent<TMP_Text>();
