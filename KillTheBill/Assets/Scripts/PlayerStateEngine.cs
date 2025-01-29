@@ -56,6 +56,11 @@ public class PlayerStateEngine : MonoBehaviour
     public void afterWeaponFired() {
         _weaponTracker[0].GetComponent<PlayerControls>().enabled = false;
         OnWeaponFired?.Invoke(_weaponTracker[0]);
+        OnFinishedFiring();
+    }
+
+    public void OnFinishedFiring()
+    {
         _weaponTracker.RemoveAt(0);
         _weaponQueue.RemoveAt(0);
         updateQueue();
@@ -114,6 +119,7 @@ public class PlayerStateEngine : MonoBehaviour
         weaponPlayerControls.enabled = isEnabled;
         var baseAmmo = obj.GetComponent<BaseAmmo>();
         var reactivateAmmo = obj.GetComponent<ReactivateAmmo>();
+        var explosiveAmmo = obj.GetComponent<ExplosiveAmmo>();
 
         if (baseAmmo != null)
         {
@@ -122,7 +128,11 @@ public class PlayerStateEngine : MonoBehaviour
         else if (reactivateAmmo != null)
         {
             reactivateAmmo.enabled = isEnabled;
-        }    
+        }
+        else if (explosiveAmmo != null)
+        {
+            explosiveAmmo.enabled = isEnabled;
+        }
     }
 
     public int GetNumWeaponsInQueue(){
