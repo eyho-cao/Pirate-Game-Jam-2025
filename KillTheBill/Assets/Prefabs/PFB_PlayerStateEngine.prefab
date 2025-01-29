@@ -81,9 +81,11 @@ MonoBehaviour:
   _weaponQueue:
   - {fileID: 2732421426448699907, guid: d700e134d1a9aa147a336a27b1cdbf58, type: 3}
   - {fileID: 2732421426448699907, guid: d700e134d1a9aa147a336a27b1cdbf58, type: 3}
-  - {fileID: 4006727101002124614, guid: 3c8186facbc01ac4db0eb142742ef4e3, type: 3}
-  - {fileID: 4006727101002124614, guid: 3c8186facbc01ac4db0eb142742ef4e3, type: 3}
-  - {fileID: 4006727101002124614, guid: 3c8186facbc01ac4db0eb142742ef4e3, type: 3}
+  - {fileID: 2732421426448699907, guid: d700e134d1a9aa147a336a27b1cdbf58, type: 3}
+  - {fileID: 2732421426448699907, guid: d700e134d1a9aa147a336a27b1cdbf58, type: 3}
+  - {fileID: 2732421426448699907, guid: d700e134d1a9aa147a336a27b1cdbf58, type: 3}
+  - {fileID: 2732421426448699907, guid: d700e134d1a9aa147a336a27b1cdbf58, type: 3}
+  - {fileID: 2732421426448699907, guid: d700e134d1a9aa147a336a27b1cdbf58, type: 3}
   _spacing: 2
   _firstPosOffset: 0
 --- !u!1 &2865370091194537445

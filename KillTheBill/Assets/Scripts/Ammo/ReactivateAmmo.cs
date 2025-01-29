@@ -42,6 +42,7 @@ public class ReactivateAmmo : BaseAmmo
 
     void Update()
     {
+        Debug.Log(_isReadyToReactivate);
         if (_isReadyToReactivate)
         {
             if (Input.GetMouseButtonDown(0))

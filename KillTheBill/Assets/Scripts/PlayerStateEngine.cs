@@ -68,6 +68,7 @@ public class PlayerStateEngine : MonoBehaviour
 
         if(_weaponQueue.Count > _numObjOnScreen) {
             GameObject weaponClone = Instantiate(_weaponQueue[_numObjOnScreen], _weaponPos[_numObjOnScreen], Quaternion.identity);
+            weaponClone.GetComponent<PlayerControls>()._playerStateEngine = this;
             _weaponTracker.Add(weaponClone);
         }
 
@@ -87,7 +88,7 @@ public class PlayerStateEngine : MonoBehaviour
             }
             Vector3 nextPos = Camera.main.WorldToViewportPoint(weaponPos);
             _weaponPos.Add(weaponPos);
-
+            
             if(nextPos.x < -0.01 || nextPos.x > 1 || nextPos.y < 0 || nextPos.y > 1) {
                 _numObjOnScreen = i;
                 break;
@@ -98,7 +99,7 @@ public class PlayerStateEngine : MonoBehaviour
 
     private void createWeaponObj() {
         //spawn obj's based on values in _weaponPos
-        for(int i = 0; i < _weaponPos.Count && i < _weaponQueue.Count; i++) {
+        for(int i = 0; i < _weaponPos.Count; i++) {
             GameObject weaponClone = Instantiate(_weaponQueue[i], _weaponPos[i], Quaternion.identity);
             if(i == 0) {
                 EnableScripts(weaponClone, true);
