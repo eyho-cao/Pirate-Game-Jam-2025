@@ -22,7 +22,7 @@ public class LevelWonSystem : MonoBehaviour
     }
 
     public void goNextLevel() {
-        Debug.Log("go to next level");
+        MenuInteractions.goNextLevel();
     }
 
 
