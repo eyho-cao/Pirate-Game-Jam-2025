@@ -6,6 +6,11 @@ public class BaseAmmo : MonoBehaviour
     private float _weight = 1.0f;
     protected Rigidbody _rigidBody;
 
+
+    protected virtual void Start()
+    {
+        
+    }
     protected virtual void Awake() 
     {
         _rigidBody = GetComponent<Rigidbody>();
