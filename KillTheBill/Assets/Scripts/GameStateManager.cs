@@ -18,7 +18,6 @@ public class GameStateManager : MonoBehaviour
     [SerializeField] private int[] _starShotRequirements = new int[3];
     [SerializeField] private GameObject _starContainer;
     [SerializeField] private PauseSystem _pauseSystem;
-    [SerializeField] private PlayerStateEngine _playerState;
     
 
     private GameState _currentGameState = GameState.GS_RUNNING;
@@ -28,7 +27,6 @@ public class GameStateManager : MonoBehaviour
 
     void Start()
     {
-        _playerState = (PlayerStateEngine)GameObject.FindFirstObjectByType(typeof(PlayerStateEngine));
         // Get all enemy objects in scene
         _enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
         foreach (var e in _enemies)

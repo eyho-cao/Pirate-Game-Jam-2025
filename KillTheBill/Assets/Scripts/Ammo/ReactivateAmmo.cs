@@ -59,8 +59,7 @@ public class ReactivateAmmo : BaseAmmo
 
     private void Reactivate()
     {
-        Vector3 parentPosition = gameObject.transform.position;
-        Vector3 position = new Vector3(parentPosition.x + 1, parentPosition.y, parentPosition.z);
+        Vector3 position = new Vector3(_nozzle.transform.position.x, _nozzle.transform.position.y, 0);
         Quaternion rotation = Quaternion.identity;
         List<GameObject> bullets = new List<GameObject>();
 
@@ -76,8 +75,6 @@ public class ReactivateAmmo : BaseAmmo
             for (int i = 0; i < _amountOfBullets; i++)
             {
                 rotation = Quaternion.Euler(0, 90, startAngle + (angleStep * i));
-                // rotation = Quaternion.Euler(0, startAngle + (angleStep * i), 0);
-                // rotation = Quaternion.Euler(startAngle + (angleStep * i), 0, 0);
 
                 bullets.Add(Instantiate(_bulletPrefab, position, rotation));
             }

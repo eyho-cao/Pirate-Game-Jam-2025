@@ -23,7 +23,6 @@ public class PlayerControls : MonoBehaviour
         _mainCamera = Camera.main;
         _rigidbody = GetComponent<Rigidbody>();
         _lineRenderer = GetComponent<LineRenderer>();
-        _rigidbody.freezeRotation = false;
         _playerStateEngine = PlayerStateEngine.Instance;
     }
 
@@ -53,6 +52,7 @@ public class PlayerControls : MonoBehaviour
         this._rigidbody.AddForce(_direction * _velocityMultiplier);
         _lineRenderer.SetPosition(0, this.transform.position);
         _lineRenderer.SetPosition(1, this.transform.position);
+        _rigidbody.freezeRotation = false;
         _playerStateEngine.afterWeaponFired();
     }
 

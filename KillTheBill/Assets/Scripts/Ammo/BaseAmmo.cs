@@ -32,7 +32,7 @@ public class BaseAmmo : MonoBehaviour
 
     public virtual void UnfreezeObject()
     {
-        _rigidBody.constraints = RigidbodyConstraints.None;
+        //_rigidBody.constraints = RigidbodyConstraints.None;
         _rigidBody.useGravity = true;
     }
 }
