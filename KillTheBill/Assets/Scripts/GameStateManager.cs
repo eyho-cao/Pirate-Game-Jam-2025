@@ -18,6 +18,7 @@ public class GameStateManager : MonoBehaviour
     [SerializeField] private int[] _starShotRequirements = new int[3];
     [SerializeField] private GameObject _starContainer;
     [SerializeField] private PauseSystem _pauseSystem;
+    [SerializeField] private LevelLostSystem _levelLostSystem;
     
 
     private GameState _currentGameState = GameState.GS_RUNNING;
@@ -27,7 +28,6 @@ public class GameStateManager : MonoBehaviour
 
     void Start()
     {
-        _playerState = (PlayerStateEngine)GameObject.FindFirstObjectByType(typeof(PlayerStateEngine));
         // Get all enemy objects in scene
         _enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
         foreach (var e in _enemies)
@@ -57,7 +57,8 @@ public class GameStateManager : MonoBehaviour
         // Dont really need to do much here for these 2 states as the UI should reflect this
         //maybe we save the attempt in a win?
         if(_currentGameState == GameState.GS_LOSE){
-            Debug.Log("LOSER");
+            _levelLostSystem.levelLost();
+            Debug.Log("Game Lost");
         }
         if(_currentGameState == GameState.GS_WIN){
             int stars = getNumStarsEarned();
@@ -70,6 +71,9 @@ public class GameStateManager : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.F)){
             _currentGameState = GameState.GS_WIN;
+        }
+        if(Input.GetKeyDown(KeyCode.L)){
+            _currentGameState = GameState.GS_LOSE;
         }
 
         checkPlayerWeaponCount();
