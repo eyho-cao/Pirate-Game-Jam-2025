@@ -14,12 +14,16 @@ public class LevelWonSystem : MonoBehaviour
 
     public void resetLevel() {
         //Need to modularize this method as it will be used in various places
-        Debug.Log("resetting level");
-        GameObject.Find("PFB_LevelWonMenu/Canvas/loading screen");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        MenuInteractions.restartLevel();
+    }
+
+    public void goMainMenu() {
+        MenuInteractions.goMainMenu();
     }
 
     public void goNextLevel() {
         Debug.Log("go to next level");
     }
+
+
 }
