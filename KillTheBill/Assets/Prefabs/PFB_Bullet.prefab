@@ -10,8 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4334003707959607961}
   - component: {fileID: 8705229469218999891}
-  - component: {fileID: 7959644100937006398}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PFB_Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +41,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4581705445923618862}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.3
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -61,19 +60,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7959644100937006398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4581705445923618862}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 893c4d08da070b340910d0efb9fbf03f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weight: 1
 --- !u!1 &5164760597615905238
 GameObject:
   m_ObjectHideFlags: 0
@@ -86,7 +72,7 @@ GameObject:
   - component: {fileID: 7623715958111096723}
   - component: {fileID: 7628629944795669361}
   - component: {fileID: 3511729308517086816}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

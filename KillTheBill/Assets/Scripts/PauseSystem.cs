@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PauseSystem : MonoBehaviour {
     [SerializeField] private GameObject pauseMenu;
-    private float gameTimeScale;
+    private float gameTimeScale = 1.0f;
 
 
     public void pauseGame() {
@@ -20,5 +20,15 @@ public class PauseSystem : MonoBehaviour {
         //close pause menu
         pauseMenu.SetActive(false);
 
+    }
+
+    public void restartLevel() {
+        Time.timeScale = gameTimeScale;
+        MenuInteractions.restartLevel();
+    }
+
+    public void goMainMenu() {
+        Time.timeScale = gameTimeScale;
+        MenuInteractions.goMainMenu();
     }
 }

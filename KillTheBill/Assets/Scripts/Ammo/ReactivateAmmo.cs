@@ -42,7 +42,6 @@ public class ReactivateAmmo : BaseAmmo
 
     void Update()
     {
-        Debug.Log(_isReadyToReactivate);
         if (_isReadyToReactivate)
         {
             if (Input.GetMouseButtonDown(0))
@@ -60,7 +59,6 @@ public class ReactivateAmmo : BaseAmmo
 
     private void Reactivate()
     {
-        Debug.LogWarning("Reactivate");
         Vector3 parentPosition = gameObject.transform.position;
         Vector3 position = new Vector3(parentPosition.x + 1, parentPosition.y, parentPosition.z);
         Quaternion rotation = Quaternion.identity;

@@ -56,6 +56,11 @@ public class PlayerStateEngine : MonoBehaviour
     public void afterWeaponFired() {
         _weaponTracker[0].GetComponent<PlayerControls>().enabled = false;
         OnWeaponFired?.Invoke(_weaponTracker[0]);
+        OnFinishedFiring();
+    }
+
+    public void OnFinishedFiring()
+    {
         _weaponTracker.RemoveAt(0);
         _weaponQueue.RemoveAt(0);
         updateQueue();
@@ -68,7 +73,6 @@ public class PlayerStateEngine : MonoBehaviour
 
         if(_weaponQueue.Count > _numObjOnScreen) {
             GameObject weaponClone = Instantiate(_weaponQueue[_numObjOnScreen], _weaponPos[_numObjOnScreen], Quaternion.identity);
-            weaponClone.GetComponent<PlayerControls>()._playerStateEngine = this;
             _weaponTracker.Add(weaponClone);
         }
 
@@ -88,7 +92,7 @@ public class PlayerStateEngine : MonoBehaviour
             }
             Vector3 nextPos = Camera.main.WorldToViewportPoint(weaponPos);
             _weaponPos.Add(weaponPos);
-            
+
             if(nextPos.x < -0.01 || nextPos.x > 1 || nextPos.y < 0 || nextPos.y > 1) {
                 _numObjOnScreen = i;
                 break;
@@ -99,7 +103,7 @@ public class PlayerStateEngine : MonoBehaviour
 
     private void createWeaponObj() {
         //spawn obj's based on values in _weaponPos
-        for(int i = 0; i < _weaponPos.Count; i++) {
+        for(int i = 0; i < _weaponPos.Count && i < _weaponQueue.Count; i++) {
             GameObject weaponClone = Instantiate(_weaponQueue[i], _weaponPos[i], Quaternion.identity);
             if(i == 0) {
                 EnableScripts(weaponClone, true);
@@ -115,6 +119,7 @@ public class PlayerStateEngine : MonoBehaviour
         weaponPlayerControls.enabled = isEnabled;
         var baseAmmo = obj.GetComponent<BaseAmmo>();
         var reactivateAmmo = obj.GetComponent<ReactivateAmmo>();
+        var explosiveAmmo = obj.GetComponent<ExplosiveAmmo>();
 
         if (baseAmmo != null)
         {
@@ -123,7 +128,11 @@ public class PlayerStateEngine : MonoBehaviour
         else if (reactivateAmmo != null)
         {
             reactivateAmmo.enabled = isEnabled;
-        }    
+        }
+        else if (explosiveAmmo != null)
+        {
+            explosiveAmmo.enabled = isEnabled;
+        }
     }
 
     public int GetNumWeaponsInQueue(){

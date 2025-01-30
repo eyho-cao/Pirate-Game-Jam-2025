@@ -1,6 +1,4 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LevelLostSystem : MonoBehaviour {
     [SerializeField] private GameObject defeatObject;
@@ -12,8 +10,12 @@ public class LevelLostSystem : MonoBehaviour {
     }
 
     public void resetLevel() {
-        Debug.Log("resetting level");
-        GameObject.Find("PFB_LevelLostMenu/Canvas/loading screen");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Debug.Log("Restarting level");
+        MenuInteractions.restartLevel();
+    }
+
+    public void goMainMenu() {
+        Debug.Log("Loading Main Menu");
+        MenuInteractions.goMainMenu();
     }
 }

@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
+using System;
 
 enum GameState {
     GS_RUNNING,
@@ -16,18 +18,24 @@ public class GameStateManager : MonoBehaviour
     [SerializeField] private int[] _starShotRequirements = new int[3];
     [SerializeField] private GameObject _starContainer;
     [SerializeField] private PauseSystem _pauseSystem;
-    [SerializeField] private LevelLostSystem levelLostSystem;
-    [SerializeField] private LevelWonSystem levelWonSystem;
+    [SerializeField] private LevelLostSystem _levelLostSystem;
     
 
-    private PlayerStateEngine _playerState;
     private GameState _currentGameState = GameState.GS_RUNNING;
 
+    private List<GameObject> _enemies;
+    private int _score = 0;
 
     void Start()
     {
-        _playerState = (PlayerStateEngine)GameObject.FindFirstObjectByType(typeof(PlayerStateEngine));
-        // Get all enemy object sin scene
+        // Get all enemy objects in scene
+        _enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
+        foreach (var e in _enemies)
+        {
+            BaseEnemy baseEnemyComponent = e.GetComponent<BaseEnemy>();
+            baseEnemyComponent.OnEnemyDied += UpdateScore;
+        }
+
     }
 
     void Update()
@@ -35,10 +43,10 @@ public class GameStateManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.P)){
             if(_currentGameState != GameState.GS_PAUSED) {
                 _currentGameState = GameState.GS_PAUSED;
-                _pauseSystem.GetComponent<PauseSystem>().pauseGame();
+                _pauseSystem.pauseGame();
             } else {
                 _currentGameState = GameState.GS_RUNNING;
-                _pauseSystem.GetComponent<PauseSystem>().unpauseGame();
+                _pauseSystem.unpauseGame();
             }
         }
         
@@ -49,14 +57,12 @@ public class GameStateManager : MonoBehaviour
         // Dont really need to do much here for these 2 states as the UI should reflect this
         //maybe we save the attempt in a win?
         if(_currentGameState == GameState.GS_LOSE){
-            Debug.Log("LOSER");
-            levelLostSystem.levelLost();
+            _levelLostSystem.levelLost();
+            Debug.Log("Game Lost");
         }
         if(_currentGameState == GameState.GS_WIN){
             int stars = getNumStarsEarned();
             Debug.Log("WINNER - " + stars + " have been earned");
-            levelWonSystem.levelWon();
-
         }
         
         // This fixed update is checking for current state of the game to see if we won or, ran out of shots and timed out
@@ -76,7 +82,7 @@ public class GameStateManager : MonoBehaviour
     }
 
     private void updateUI() {
-        int numWeaponsLeft = _playerState.GetNumWeaponsInQueue();
+        int numWeaponsLeft = PlayerStateEngine.Instance.GetNumWeaponsInQueue();
         _countText.text = "Weapons: " + numWeaponsLeft;
 
         int stars = getNumStarsEarned();
@@ -101,8 +107,8 @@ public class GameStateManager : MonoBehaviour
   
     private void checkPlayerWeaponCount() {
         
-        if(_playerState){
-            int numWeaponsLeft = _playerState.GetNumWeaponsInQueue();
+        if(PlayerStateEngine.Instance){
+            int numWeaponsLeft = PlayerStateEngine.Instance.GetNumWeaponsInQueue();
             _countText.text = "Weapons: " + numWeaponsLeft;
             if(numWeaponsLeft <= 0) {
                 StartCoroutine(WaitForGameCompleteState());
@@ -111,7 +117,7 @@ public class GameStateManager : MonoBehaviour
     }
 
     private int getNumStarsEarned() {
-        int numWeaponsLeft = _playerState.GetNumWeaponsInQueue();
+        int numWeaponsLeft = PlayerStateEngine.Instance.GetNumWeaponsInQueue();
         int i = 0;
         for (i = 0; i < _starShotRequirements.Length; i++) {
             if(numWeaponsLeft < _starShotRequirements[i]){
@@ -120,4 +126,13 @@ public class GameStateManager : MonoBehaviour
         }
         return i;
     }
+
+    private void UpdateScore(int score)
+    {
+        if (score > 0)
+            _score += score;
+        
+        Debug.Log($"Score: {_score}");
+    }
+
 }
