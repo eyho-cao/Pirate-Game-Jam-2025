@@ -93,7 +93,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4440036874012627176
 RectTransform:
   m_ObjectHideFlags: 0
@@ -244,7 +244,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: CONTINUE
+  m_text: NEXT LEVEL
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -436,7 +436,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2130423974668862100}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: LevelLostSystem, Assembly-CSharp
         m_MethodName: resetLevel
         m_Mode: 1
@@ -671,7 +671,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3167088343596621063}
-  - component: {fileID: 2130423974668862100}
+  - component: {fileID: 5529363664315494358}
   m_Layer: 0
   m_Name: PFB_LevelWonMenu
   m_TagString: Untagged
@@ -695,7 +695,7 @@ Transform:
   - {fileID: 4440036874012627176}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2130423974668862100
+--- !u!114 &5529363664315494358
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -704,10 +704,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4208083728785118323}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3196bdf29aa48049b71aeb475e3eb6e, type: 3}
+  m_Script: {fileID: 11500000, guid: ca67e3d833c42eb4d86ef9fab587c49f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defeatObject: {fileID: 409446377644128913}
+  winMenuObject: {fileID: 409446377644128913}
 --- !u!1 &6315138889967143633
 GameObject:
   m_ObjectHideFlags: 0
@@ -829,8 +829,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2130423974668862100}
-        m_TargetAssemblyTypeName: LevelLostSystem, Assembly-CSharp
+      - m_Target: {fileID: 5529363664315494358}
+        m_TargetAssemblyTypeName: LevelWonSystem, Assembly-CSharp
         m_MethodName: resetLevel
         m_Mode: 1
         m_Arguments:
@@ -1037,9 +1037,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PauseSystem, Assembly-CSharp
-        m_MethodName: unpauseGame
+      - m_Target: {fileID: 5529363664315494358}
+        m_TargetAssemblyTypeName: LevelWonSystem, Assembly-CSharp
+        m_MethodName: goMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
