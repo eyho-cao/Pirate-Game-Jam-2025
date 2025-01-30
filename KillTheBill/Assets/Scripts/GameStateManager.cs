@@ -18,6 +18,7 @@ public class GameStateManager : MonoBehaviour
     [SerializeField] private int[] _starShotRequirements = new int[3];
     [SerializeField] private GameObject _starContainer;
     [SerializeField] private PauseSystem _pauseSystem;
+    [SerializeField] private PlayerStateEngine _playerState;
     
 
     private GameState _currentGameState = GameState.GS_RUNNING;
