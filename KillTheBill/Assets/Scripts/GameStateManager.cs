@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
-using System;
 
 enum GameState {
     GS_RUNNING,
@@ -19,7 +18,8 @@ public class GameStateManager : MonoBehaviour
     [SerializeField] private GameObject _starContainer;
     [SerializeField] private PauseSystem _pauseSystem;
     [SerializeField] private LevelLostSystem _levelLostSystem;
-    
+    [SerializeField] private LevelWonSystem _levelWonSystem;
+     
 
     private GameState _currentGameState = GameState.GS_RUNNING;
 
@@ -63,6 +63,7 @@ public class GameStateManager : MonoBehaviour
         if(_currentGameState == GameState.GS_WIN){
             int stars = getNumStarsEarned();
             Debug.Log("WINNER - " + stars + " have been earned");
+            _levelWonSystem.levelWon(stars);
         }
         
         // This fixed update is checking for current state of the game to see if we won or, ran out of shots and timed out
