@@ -606,7 +606,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1005510503
 RectTransform:
   m_ObjectHideFlags: 0
@@ -760,7 +760,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1338669025
 RectTransform:
   m_ObjectHideFlags: 0
@@ -835,7 +835,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1898779022
 RectTransform:
   m_ObjectHideFlags: 0
@@ -909,6 +909,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 612048918}
+    - target: {fileID: 2248702690104093651, guid: 12d1166169a140b4c80608b0910d9607, type: 3}
+      propertyPath: _starContainer
+      value: 
+      objectReference: {fileID: 967300173}
     - target: {fileID: 4601358438513795940, guid: 12d1166169a140b4c80608b0910d9607, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -955,12 +959,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6207759731422461588, guid: 12d1166169a140b4c80608b0910d9607, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6255265543833984401, guid: 12d1166169a140b4c80608b0910d9607, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 612048918}
+    - target: {fileID: 9066890613922443182, guid: 12d1166169a140b4c80608b0910d9607, type: 3}
+      propertyPath: m_Name
+      value: Level Won Menu
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 3655735015991852919, guid: 12d1166169a140b4c80608b0910d9607, type: 3}
