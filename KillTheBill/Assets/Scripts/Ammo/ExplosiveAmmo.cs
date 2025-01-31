@@ -41,14 +41,17 @@ public class ExplosiveAmmo : BaseAmmo
 
     void Update()
     {
-        if (_currentTime <= 0 && !_isReadyToExplode)
-        {
-            _isReadyToExplode = true;
-            Explode();
-            return;
-        }
+        if(_isWeaponOnFlight) {
 
-        _currentTime -= Time.deltaTime;
+            if (_currentTime <= 0 && !_isReadyToExplode)
+            {
+                _isReadyToExplode = true;
+                Explode();
+                return;
+            }
+
+            _currentTime -= Time.deltaTime;
+        }
         UpdateText(((int)_currentTime).ToString());
     }
 

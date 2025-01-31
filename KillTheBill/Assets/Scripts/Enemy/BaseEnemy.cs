@@ -35,13 +35,16 @@ public class BaseEnemy : MonoBehaviour
         
         GameObject otherGameObject = other.gameObject;
 
+        Vector3 velocity = _rigidBody.linearVelocity;
+        Debug.Log(velocity);
+
         if ((collidableLayerMask & (1 << other.gameObject.layer)) != 0)
         {
             // If the enemy is placed on a "Wall" object, it shouldn't deal damage to itself
             // Only when fallen on top of it, would it die!
             if ((wallLayerMask & (1 << other.gameObject.layer)) != 0)
             {
-                if (otherGameObject.transform.position.y <= this.transform.position.y)
+                if (otherGameObject.transform.position.y <= this.transform.position.y && velocity.y < 0.1)
                 {
                     return;
                 }
