@@ -21,4 +21,14 @@ public class PauseSystem : MonoBehaviour {
         pauseMenu.SetActive(false);
 
     }
+
+    public void restartLevel() {
+        Time.timeScale = gameTimeScale;
+        MenuInteractions.restartLevel();
+    }
+
+    public void goMainMenu() {
+        Time.timeScale = gameTimeScale;
+        MenuInteractions.goMainMenu();
+    }
 }
