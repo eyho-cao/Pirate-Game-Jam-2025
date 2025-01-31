@@ -999,6 +999,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PFB_GameStateManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3792226991758666784, guid: 12d1166169a140b4c80608b0910d9607, type: 3}
+      propertyPath: _soundSystem
+      value: 
+      objectReference: {fileID: 432388181634018712, guid: 7a3127a9b8e0efa41a89966b488e4d6d, type: 3}
     - target: {fileID: 4601358438513795940, guid: 12d1166169a140b4c80608b0910d9607, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
