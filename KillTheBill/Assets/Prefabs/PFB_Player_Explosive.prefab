@@ -69,8 +69,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weight: 1
   _timeUntilExplosion: 5
-  _explosionRadius: 10
-  _explosionForce: 500
+  _explosionRadius: 2.8
+  _explosionForce: 800
   _countdownTextObject: {fileID: 6068091351863117961}
 --- !u!54 &2404796212779789383
 Rigidbody:

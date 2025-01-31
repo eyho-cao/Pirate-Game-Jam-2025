@@ -70,6 +70,12 @@ public class ExplosiveAmmo : BaseAmmo
                     rb.AddExplosionForce(_explosionForce, transform.position, _explosionRadius);
                 }
             }
+            Debug.Log(coll.gameObject);
+            Debug.Log(coll.gameObject.tag);
+            if(coll.gameObject.tag == "Enemy"){
+                BaseEnemy enemy = coll.gameObject.GetComponentInParent<BaseEnemy>();
+                enemy.HandleDamaged(1);
+            }
         }
 
         _countdownTextObject.SetActive(false);
