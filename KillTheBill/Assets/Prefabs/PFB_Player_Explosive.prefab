@@ -97,7 +97,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 72
   m_CollisionDetection: 0
 --- !u!120 &7212011980522846775
 LineRenderer:
@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 1621308528682791230}
   - component: {fileID: 9044921022659090195}
   - component: {fileID: 5114453473881100179}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CountdownText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -455,6 +455,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 524e524ff06cf7549b0abbe7aee55eac, type: 3}
       propertyPath: m_Name
       value: Bomb_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 524e524ff06cf7549b0abbe7aee55eac, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
