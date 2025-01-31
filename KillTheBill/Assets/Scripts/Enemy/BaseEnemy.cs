@@ -37,7 +37,6 @@ public class BaseEnemy : MonoBehaviour
         GameObject otherGameObject = other.gameObject;
 
         Vector3 velocity = _rigidBody.linearVelocity;
-        Debug.Log(velocity);
 
         if ((collidableLayerMask & (1 << other.gameObject.layer)) != 0)
         {
@@ -46,14 +45,17 @@ public class BaseEnemy : MonoBehaviour
             // Or if the unit is falling faster than death speed
             if ((wallLayerMask & (1 << other.gameObject.layer)) != 0)
             {
-                if((otherGameObject.transform.position.y < this.transform.position.y && velocity.y < _deathSpeed) || otherGameObject.transform.position.y > this.transform.position.y){
-                    float objectWeight = other.gameObject.GetComponent<Rigidbody>().mass;
-                    if (objectWeight > _weight)
-                    {
-                        _health -= objectWeight;
-                    }
+                if((otherGameObject.transform.position.y <= this.transform.position.y && velocity.y < _deathSpeed) || otherGameObject.transform.position.y >= this.transform.position.y){
+                    _health -= 1;
                 }
 
+            }
+            else if(other.gameObject.tag == "Player" || other.gameObject.tag == "Bullet"){
+                float objectWeight = other.gameObject.GetComponent<Rigidbody>().mass;
+                if (objectWeight > _weight)
+                {
+                    _health -= objectWeight;
+                }
             }
 
         }
