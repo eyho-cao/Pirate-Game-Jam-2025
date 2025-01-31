@@ -64,7 +64,7 @@ public class GameStateManager : MonoBehaviour
         if(_currentGameState == GameState.GS_WIN){
             int stars = getNumStarsEarned();
             Debug.Log("WINNER - " + stars + " have been earned");
-            _levelWonSystem.levelWon();
+            _levelWonSystem.levelWon(stars);
         }
         
         // This fixed update is checking for current state of the game to see if we won or, ran out of shots and timed out

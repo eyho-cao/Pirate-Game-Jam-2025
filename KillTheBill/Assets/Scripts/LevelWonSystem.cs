@@ -5,9 +5,14 @@ public class LevelWonSystem : MonoBehaviour
 {
 
     [SerializeField] private GameObject winMenuObject;
+    [SerializeField] private GameObject _starContainer;
 
 
-    public void levelWon() {
+    public void levelWon(int stars) {
+        for(int i = 0; i < stars; i++) {
+            GameObject star = _starContainer.transform.GetChild(i).gameObject;
+            star.SetActive(true);
+        }
         winMenuObject.SetActive(true);
         
     }
