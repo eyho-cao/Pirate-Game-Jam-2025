@@ -130,6 +130,7 @@ MonoBehaviour:
   _pauseSystem: {fileID: 2271503501277384573}
   _levelLostSystem: {fileID: 6996609313095036142}
   _levelWonSystem: {fileID: 2248702690104093651}
+  _soundSystemObj: {fileID: 0}
 --- !u!1 &3063188039422538322
 GameObject:
   m_ObjectHideFlags: 0

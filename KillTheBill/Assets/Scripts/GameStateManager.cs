@@ -20,6 +20,9 @@ public class GameStateManager : MonoBehaviour
     [SerializeField] private LevelLostSystem _levelLostSystem;
     [SerializeField] private LevelWonSystem _levelWonSystem;
      
+    [SerializeField] private GameObject _soundSystemObj;
+    private SoundSystem _soundSystem;
+    
 
     private GameState _currentGameState = GameState.GS_RUNNING;
 
@@ -36,6 +39,9 @@ public class GameStateManager : MonoBehaviour
             baseEnemyComponent.OnEnemyDied += UpdateScore;
         }
 
+
+        _soundSystem = _soundSystemObj.GetComponent<SoundSystem>();
+        _soundSystem.PlayBGM("BGM_Game");
     }
 
     void Update()
