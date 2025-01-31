@@ -24,19 +24,7 @@ public class GameStateManager : MonoBehaviour
     private GameState _currentGameState = GameState.GS_RUNNING;
 
     private List<GameObject> _enemies;
-    private int _score = 0;
 
-    void Start()
-    {
-        // Get all enemy objects in scene
-        _enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
-        foreach (var e in _enemies)
-        {
-            BaseEnemy baseEnemyComponent = e.GetComponent<BaseEnemy>();
-            baseEnemyComponent.OnEnemyDied += UpdateScore;
-        }
-
-    }
 
     void Update()
     {
@@ -56,30 +44,31 @@ public class GameStateManager : MonoBehaviour
     {   
         // Dont really need to do much here for these 2 states as the UI should reflect this
         //maybe we save the attempt in a win?
-        if(_currentGameState == GameState.GS_LOSE){
+        if(_currentGameState == GameState.GS_LOSE) {
             _levelLostSystem.levelLost();
             Debug.Log("Game Lost");
         }
-        if(_currentGameState == GameState.GS_WIN){
+        if(_currentGameState == GameState.GS_WIN) {
             int stars = getNumStarsEarned();
             Debug.Log("WINNER - " + stars + " have been earned");
             _levelWonSystem.levelWon(stars);
         }
         
         // This fixed update is checking for current state of the game to see if we won or, ran out of shots and timed out
-        if(_currentGameState != GameState.GS_RUNNING){
+        if(_currentGameState != GameState.GS_RUNNING) {
             return;
         }
-        if(Input.GetKeyDown(KeyCode.F)){
-            _currentGameState = GameState.GS_WIN;
-        }
-        if(Input.GetKeyDown(KeyCode.L)){
-            _currentGameState = GameState.GS_LOSE;
-        }
-
+        checkForWinState();
         checkPlayerWeaponCount();
         updateUI();
         // Need some form of enemy check here
+    }
+
+    private void checkForWinState() {
+        int enemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        if(enemies <= 0) {
+            _currentGameState = GameState.GS_WIN;
+        }
     }
 
     private void updateUI() {
@@ -126,14 +115,6 @@ public class GameStateManager : MonoBehaviour
             }
         }
         return i;
-    }
-
-    private void UpdateScore(int score)
-    {
-        if (score > 0)
-            _score += score;
-        
-        Debug.Log($"Score: {_score}");
     }
 
 }
