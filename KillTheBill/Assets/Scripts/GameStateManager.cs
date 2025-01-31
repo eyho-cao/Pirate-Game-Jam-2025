@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
-using System;
 
 enum GameState {
     GS_RUNNING,
@@ -18,7 +17,9 @@ public class GameStateManager : MonoBehaviour
     [SerializeField] private int[] _starShotRequirements = new int[3];
     [SerializeField] private GameObject _starContainer;
     [SerializeField] private PauseSystem _pauseSystem;
-    
+    [SerializeField] private LevelLostSystem _levelLostSystem;
+    [SerializeField] private LevelWonSystem _levelWonSystem;
+     
 
     private GameState _currentGameState = GameState.GS_RUNNING;
 
@@ -56,11 +57,13 @@ public class GameStateManager : MonoBehaviour
         // Dont really need to do much here for these 2 states as the UI should reflect this
         //maybe we save the attempt in a win?
         if(_currentGameState == GameState.GS_LOSE){
-            Debug.Log("LOSER");
+            _levelLostSystem.levelLost();
+            Debug.Log("Game Lost");
         }
         if(_currentGameState == GameState.GS_WIN){
             int stars = getNumStarsEarned();
             Debug.Log("WINNER - " + stars + " have been earned");
+            _levelWonSystem.levelWon(stars);
         }
         
         // This fixed update is checking for current state of the game to see if we won or, ran out of shots and timed out
@@ -69,6 +72,9 @@ public class GameStateManager : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.F)){
             _currentGameState = GameState.GS_WIN;
+        }
+        if(Input.GetKeyDown(KeyCode.L)){
+            _currentGameState = GameState.GS_LOSE;
         }
 
         checkPlayerWeaponCount();
