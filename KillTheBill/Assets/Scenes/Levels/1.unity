@@ -650,8 +650,16 @@ PrefabInstance:
       value: 510
       objectReference: {fileID: 0}
     - target: {fileID: 3792226991758666784, guid: 12d1166169a140b4c80608b0910d9607, type: 3}
+      propertyPath: '_starShotRequirements.Array.data[0]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3792226991758666784, guid: 12d1166169a140b4c80608b0910d9607, type: 3}
+      propertyPath: '_starShotRequirements.Array.data[1]'
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3792226991758666784, guid: 12d1166169a140b4c80608b0910d9607, type: 3}
       propertyPath: '_starShotRequirements.Array.data[2]'
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4601358438513795940, guid: 12d1166169a140b4c80608b0910d9607, type: 3}
       propertyPath: m_LocalPosition.x
@@ -780,8 +788,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1387458856969581091, guid: 650f7ec50fa848e448ae5d108d074136, type: 3}
       propertyPath: _weaponQueue.Array.size
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1387458856969581091, guid: 650f7ec50fa848e448ae5d108d074136, type: 3}
+      propertyPath: '_weaponQueue.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2732421426448699907, guid: d700e134d1a9aa147a336a27b1cdbf58, type: 3}
     - target: {fileID: 1387458856969581091, guid: 650f7ec50fa848e448ae5d108d074136, type: 3}
       propertyPath: '_weaponQueue.Array.data[2]'
       value: 

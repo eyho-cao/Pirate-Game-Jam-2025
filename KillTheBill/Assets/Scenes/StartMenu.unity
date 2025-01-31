@@ -1523,7 +1523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b0409dd2624e241864e829f4cfb038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _numLevels: 2
+  _numLevels: 7
   _levelSelectMenu: {fileID: 1848434007}
   _verticalGap: 280
   _horizontalGap: 250

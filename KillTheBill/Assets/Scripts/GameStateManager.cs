@@ -24,19 +24,7 @@ public class GameStateManager : MonoBehaviour
     private GameState _currentGameState = GameState.GS_RUNNING;
 
     private List<GameObject> _enemies;
-    private int _score = 0;
 
-    void Start()
-    {
-        // Get all enemy objects in scene
-        _enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
-        foreach (var e in _enemies)
-        {
-            BaseEnemy baseEnemyComponent = e.GetComponent<BaseEnemy>();
-            baseEnemyComponent.OnEnemyDied += UpdateScore;
-        }
-
-    }
 
     void Update()
     {
@@ -127,14 +115,6 @@ public class GameStateManager : MonoBehaviour
             }
         }
         return i;
-    }
-
-    private void UpdateScore(int score)
-    {
-        if (score > 0)
-            _score += score;
-        
-        Debug.Log($"Score: {_score}");
     }
 
 }
